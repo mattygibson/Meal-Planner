@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from API import meals, meal_plans
+from mangum import Mangum
 from fastapi.middleware.cors import CORSMiddleware
 
 # Create FastAPI app instance
@@ -20,5 +21,7 @@ app.add_middleware(
 # Include API routers
 app.include_router(meals.router)
 app.include_router(meal_plans.router)
+
+handler = Mangum(app)
 
 
