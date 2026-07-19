@@ -1,0 +1,21 @@
+# Dependencies (rebuilt in Docker)
+node_modules/
+
+# Build output (rebuilt in Docker)
+dist/
+
+# Environment files (injected at runtime)
+.env
+.env.*
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db

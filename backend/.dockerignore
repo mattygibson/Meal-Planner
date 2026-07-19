@@ -1,0 +1,31 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# Virtual environments
+venv/
+.venv/
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+
+# Git and IDE
+.git
+.gitignore
+.vscode/
+.idea/
+
+# Environment files
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Unused app code
+Db/

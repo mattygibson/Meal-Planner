@@ -18,6 +18,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Health check endpoint (required by GreenCloud)
+@app.get("/health", tags=["Health"])
+def health_check():
+    return {"status": "healthy", "service": "meal-planner-api"}
+
+
 # Include API routers
 app.include_router(meals.router)
 app.include_router(meal_plans.router)

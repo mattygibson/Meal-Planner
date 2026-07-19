@@ -1,0 +1,38 @@
+# GreenCloud App Configuration
+# This file tells GreenCloud how to deploy your app.
+# See: https://github.com/mattygibson/green-cloud/docs/guides/deploy-your-first-app.md
+
+name: meal-planner
+description: A full-stack meal planner with random weekly plan generation
+
+# Services that make up this app
+services:
+  api:
+    context: ./backend
+    port: 8000
+    health_check: /health
+    environment:
+      - PYTHONUNBUFFERED=1
+    resources:
+      memory: 128MB
+      cpu: 0.25
+
+  ui:
+    context: ./frontend
+    port: 80
+    health_check: /
+    environment:
+      - VITE_API_URL=/api
+    resources:
+      memory: 64MB
+      cpu: 0.1
+
+# Routing — how Traefik exposes this app
+routing:
+  subdomain: meal-planner
+  # Final URL: https://meal-planner.greencloud.yourdomain.com
+  rules:
+    - path_prefix: /api
+      service: api
+    - path_prefix: /
+      service: ui

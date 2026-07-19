@@ -1,0 +1,26 @@
+[project]
+name = "meal-planner-api"
+version = "1.0.0"
+description = "A simple meal planner API using JSON file storage"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi==0.110.0",
+    "uvicorn[standard]==0.27.1",
+    "pydantic==2.6.1",
+    "python-dotenv==1.0.1",
+    "mangum>=0.20.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff",
+    "pytest",
+    "httpx",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
