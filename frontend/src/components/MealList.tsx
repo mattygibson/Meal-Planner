@@ -24,7 +24,7 @@ export default function MealList() {
 
   return (
     <div className="flex flex-col gap-6">
-      <h2 className="text-2xl font-bold mb-4 text-blue-400">All Meals</h2>
+      <h2 className="text-2xl font-bold mb-4 text-blue-400">All Meals Available</h2>
 
       <div className="flex flex-wrap gap-4 mb-6">
         <div>
