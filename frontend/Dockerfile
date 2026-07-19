@@ -9,8 +9,8 @@ FROM node:20-alpine AS builder
 WORKDIR /build
 
 # Copy dependency files first (maximise layer caching)
-COPY package.json package-lock.json ./
-RUN npm ci
+COPY package.json package-lock.json* ./
+RUN if [ -f package-lock.json ]; then npm ci; else npm install; fi
 
 # Copy source and build
 COPY . .
