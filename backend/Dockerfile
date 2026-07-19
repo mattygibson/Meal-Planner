@@ -13,7 +13,9 @@ WORKDIR /build
 
 # Copy dependency files first (maximises layer caching)
 COPY pyproject.toml uv.lock ./
-RUN uv sync --frozen --no-dev --no-install-project
+
+# Install dependencies into the system Python (no venv in builder)
+RUN uv pip install --system --no-cache -r pyproject.toml
 
 # Stage 2: Runtime
 FROM python:3.12-slim AS runtime
@@ -23,11 +25,9 @@ WORKDIR /app
 # Create non-root user
 RUN addgroup --system appuser && adduser --system --ingroup appuser appuser
 
-# Copy the virtual environment from builder
-COPY --from=builder /build/.venv /app/.venv
-
-# Add venv to PATH so uvicorn and packages are available
-ENV PATH="/app/.venv/bin:$PATH"
+# Copy installed packages from builder
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY --from=builder /usr/local/bin/uvicorn /usr/local/bin/uvicorn
 
 # Copy application source code
 COPY main.py .
